@@ -23,8 +23,13 @@
         "noFallthroughCasesInSwitch": true
     },
     "include": [
-        "**/*.ts",
-        "**/*.tsx"
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "*.ts",
+        "*.tsx"
+    ],
+    "exclude": [
+        "vite.config.ts"
     ],
     "references": [
         {

@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { SYLLABUS_DATA, CONTENT_REGISTRY } from './constants';
 import Sidebar from './components/Sidebar';
@@ -44,11 +43,11 @@ const App: React.FC = () => {
             <div className="bg-white p-6 rounded-full shadow-sm mb-4">
                 <FileWarning className="w-12 h-12 text-slate-300" />
             </div>
-            <h2 className="text-xl font-bold text-slate-600 mb-2">内容未找到</h2>
+            <h2 className="text-xl font-bold text-slate-600 mb-2">内容生成中...</h2>
             <p className="max-w-md text-slate-500 mb-6">
-              ID: <span className="font-mono bg-slate-200 px-1 rounded">{activeId}</span> 的内容暂时无法显示。
+              ID: <span className="font-mono bg-slate-200 px-1 rounded">{activeId}</span> 的内容暂时不在当前的生成批次中。
               <br/>
-              请选择左侧目录中的其他章节查看。
+              请先查看 <strong>Phase 1, 2, 3, 4</strong> 的内容。
             </p>
             <button 
                 onClick={() => setActiveId('dashboard')}
