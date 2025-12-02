@@ -1,91 +1,112 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronRight, Home } from 'lucide-react';
-
-interface SyllabusItem {
-    id: string;
-    title: string;
-    children?: SyllabusItem[];
-}
+import { ChevronRight, ChevronDown, Book, FileText, Hash } from 'lucide-react';
+import { Part, SidebarNode } from '../types';
 
 interface SidebarProps {
-    data: SyllabusItem[];
-    onNavigate: (id: string) => void;
-    currentView: string;
+  data: Part[];
+  onNavigate: (id: string) => void;
+  currentView: string;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ data, onNavigate, currentView }) => {
-    const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+  return (
+    <div className="w-80 bg-slate-900 text-slate-300 h-screen overflow-y-auto flex-shrink-0 border-r border-slate-800 flex flex-col">
+      <div
+        className={`p-4 border-b border-slate-800 font-bold text-white flex items-center gap-2 cursor-pointer hover:bg-slate-800 transition-colors ${currentView === 'dashboard' ? 'bg-slate-800' : ''}`}
+        onClick={() => onNavigate('dashboard')}
+      >
+        <Book className="w-5 h-5 text-blue-400" />
+        复习大纲目录
+      </div>
+      <div className="p-2 space-y-4 flex-1">
+        {data.map((part, idx) => (
+          <div key={idx} className="space-y-1">
+            <h3 className="px-2 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 mt-4">
+              {part.title}
+            </h3>
+            {part.chapters.map(chapter => (
+              <SidebarItem
+                key={chapter.id}
+                node={chapter}
+                level={0}
+                onNavigate={onNavigate}
+                currentView={currentView}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
-    const toggleExpand = (id: string) => {
-        setExpanded(prev => ({ ...prev, [id]: !prev[id] }));
-    };
+const SidebarItem: React.FC<{
+    node: SidebarNode;
+    level: number;
+    onNavigate: (id: string) => void;
+    currentView: string
+}> = ({ node, level, onNavigate, currentView }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const isActive = currentView === node.id;
+  const hasChildren = node.children && node.children.length > 0;
 
-    const renderItem = (item: SyllabusItem, depth: number = 0) => {
-        const hasChildren = item.children && item.children.length > 0;
-        const isExpanded = expanded[item.id];
-        const isActive = currentView === item.id;
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onNavigate(node.id);
+    if (hasChildren) {
+        setIsOpen(true);
+    }
+  };
 
-        return (
-            <div key={item.id}>
-                <div
-                    className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all ${isActive
-                            ? 'bg-blue-600 text-white font-semibold shadow-md'
-                            : 'hover:bg-slate-100 text-slate-700'
-                        }`}
-                    style={{ paddingLeft: `${depth * 12 + 12}px` }}
-                    onClick={() => {
-                        if (hasChildren) {
-                            toggleExpand(item.id);
-                        }
-                        onNavigate(item.id);
-                    }}
-                >
-                    {hasChildren && (
-                        <span className="shrink-0">
-                            {isExpanded ? (
-                                <ChevronDown className="w-4 h-4" />
-                            ) : (
-                                <ChevronRight className="w-4 h-4" />
-                            )}
-                        </span>
-                    )}
-                    {!hasChildren && <span className="w-4" />}
-                    <span className="text-sm flex-1">{item.title}</span>
-                </div>
-                {hasChildren && isExpanded && (
-                    <div className="mt-1">
-                        {item.children!.map(child => renderItem(child, depth + 1))}
-                    </div>
-                )}
+  const handleToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsOpen(!isOpen);
+  };
+
+  // Styles based on depth level
+  const paddingLeft = level === 0 ? 'px-2' : level === 1 ? 'pl-4 pr-2' : 'pl-8 pr-2';
+  const fontSize = level === 0 ? 'text-sm font-medium' : 'text-sm';
+  const icon = level === 0 ? null : level === 1 ? <Hash className="w-3 h-3 opacity-50 mr-2" /> : <FileText className="w-3 h-3 opacity-50 mr-2" />;
+
+  return (
+    <div className="space-y-0.5">
+      <div
+        className={`flex items-center ${paddingLeft} py-1.5 rounded-md cursor-pointer transition-colors group ${isActive ? 'bg-blue-900/50 text-blue-200' : 'hover:bg-slate-800 hover:text-white'}`}
+        onClick={handleClick}
+      >
+        {hasChildren ? (
+            <div
+                onClick={handleToggle}
+                className="p-1 rounded hover:bg-white/10 text-slate-400 hover:text-white mr-1"
+            >
+                {isOpen ? <ChevronDown className="w-3 h-3" /> : <ChevronRight className="w-3 h-3" />}
             </div>
-        );
-    };
+        ) : (
+            <div className="w-5 mr-1" /> // Spacer
+        )}
 
-    return (
-        <aside className="w-80 bg-white border-r border-slate-200 overflow-y-auto">
-            <div className="p-4 border-b border-slate-200">
-                <h2 className="text-xl font-bold text-slate-800">计算机组成原理</h2>
-                <p className="text-xs text-slate-500 mt-1">期末复习助手</p>
-            </div>
+        {icon}
 
-            <div className="p-3">
-                <div
-                    className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all mb-2 ${currentView === 'dashboard'
-                            ? 'bg-blue-600 text-white font-semibold shadow-md'
-                            : 'hover:bg-slate-100 text-slate-700'
-                        }`}
-                    onClick={() => onNavigate('dashboard')}
-                >
-                    <Home className="w-4 h-4" />
-                    <span className="text-sm">复习主页</span>
-                </div>
+        <span className={`${fontSize} truncate flex-1`} title={node.title}>
+            {node.title}
+        </span>
+      </div>
 
-                <div className="space-y-1">
-                    {data.map(item => renderItem(item))}
-                </div>
-            </div>
-        </aside>
-    );
+      {isOpen && hasChildren && (
+        <div className={`border-l border-slate-800 ${level === 0 ? 'ml-4' : 'ml-6'} space-y-0.5`}>
+          {node.children!.map(child => (
+            <SidebarItem
+                key={child.id}
+                node={child}
+                level={level + 1}
+                onNavigate={onNavigate}
+                currentView={currentView}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Sidebar;

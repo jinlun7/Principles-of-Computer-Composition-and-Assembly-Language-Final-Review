@@ -84,14 +84,15 @@ const PlanDashboard: React.FC = () => {
               </div>
               <h3 className="font-bold text-slate-800 mb-2">{plan.title}</h3>
               <p className="text-sm text-slate-600 mb-3 h-16">{plan.content}</p>
-              <div className="flex items-center gap-2 text-xs font-semibold text-green-600">
-                <span>{plan.status === 'Completed' ? '已完成' : '待生成'}</span>
+              <div className={`flex items-center gap-2 text-xs font-semibold ${plan.status === 'Completed' ? 'text-green-600' : 'text-blue-600'}`}>
+                {plan.status === 'Completed' ? <CheckCircle2 className="w-4 h-4" /> : null}
+                <span>{plan.status}</span>
               </div>
             </div>
           ))}
         </div>
-        <div className="mt-6 p-4 bg-green-50 text-green-800 rounded-lg text-sm border border-green-100">
-          <strong>状态：</strong> 所有章节复习资料已生成完毕。请从左侧目录选择章节开始复习。
+        <div className="mt-6 p-4 bg-blue-50 text-blue-800 rounded-lg text-sm border border-blue-100">
+          <strong>状态更新：</strong> 基础知识、核心攻坚、汇编与系统扩展内容已根据最新目录更新。请浏览左侧目录查看详情。
         </div>
       </div>
     </div>

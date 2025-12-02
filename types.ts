@@ -1,39 +1,39 @@
-export interface KeyPoint {
-    title: string;
-    content: string;
-    isExamFocus?: boolean;
-    formulas?: string[];
-}
-
 export interface Example {
-    question: string;
-    solution: string;
-    tip?: string;
+  question: string;
+  solution: string;
+  tip?: string;
 }
 
+export interface KeyPoint {
+  title: string;
+  content: string;
+  isExamFocus?: boolean;
+  formulas?: string[];
+}
+
+export type ContentType = 'chapter' | 'section' | 'subsection';
+
+// The universal unit of content.
+// Whether it's a Chapter, Section, or SubSection, it looks like this.
 export interface ContentBlock {
-    id: string;
-    type: 'chapter' | 'section' | 'subsection';
-    title: string;
-    description?: string;
-    childrenIds?: string[];
-    keyPoints?: KeyPoint[];
-    examples?: Example[];
-    // For compatibility if we want to keep the old structure or if some blocks use it
-    sections?: {
-        subtitle?: string;
-        content: string | string[];
-        type?: 'text' | 'list' | 'important' | 'tip';
-    }[];
+  id: string;
+  type: ContentType;
+  title: string;
+  description?: string; // Summary or Intro
+  keyPoints?: KeyPoint[];
+  examples?: Example[];
+  childrenIds?: string[]; // IDs of the next level down (for navigation)
+  sections?: any[]; // Keep for legacy if needed, but new code uses childrenIds
 }
 
-export interface SyllabusItem {
-    id: string;
-    title: string;
-    children?: SyllabusItem[];
+// Syllabus Structure for Sidebar (Tree)
+export interface SidebarNode {
+  id: string;
+  title: string;
+  children?: SidebarNode[];
 }
 
 export interface Part {
-    title: string;
-    chapters: SyllabusItem[];
+  title: string;
+  chapters: SidebarNode[];
 }
