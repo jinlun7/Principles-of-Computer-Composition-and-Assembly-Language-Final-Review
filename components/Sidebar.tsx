@@ -7,8 +7,13 @@ interface SyllabusItem {
     children?: SyllabusItem[];
 }
 
+export interface Part {
+    title: string;
+    chapters: SyllabusItem[];
+}
+
 interface SidebarProps {
-    data: SyllabusItem[];
+    data: Part[];
     onNavigate: (id: string) => void;
     currentView: string;
 }
@@ -80,8 +85,17 @@ const Sidebar: React.FC<SidebarProps> = ({ data, onNavigate, currentView }) => {
                     <span className="text-sm">复习主页</span>
                 </div>
 
-                <div className="space-y-1">
-                    {data.map(item => renderItem(item))}
+                <div className="space-y-4">
+                    {data.map((part, index) => (
+                        <div key={index}>
+                            <h3 className="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+                                {part.title}
+                            </h3>
+                            <div className="space-y-1">
+                                {part.chapters.map(chapter => renderItem(chapter))}
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </aside>
