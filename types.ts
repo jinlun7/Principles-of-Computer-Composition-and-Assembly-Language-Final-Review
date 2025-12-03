@@ -16,6 +16,7 @@ export interface ContentBlock {
     type: 'chapter' | 'section' | 'subsection';
     title: string;
     description?: string;
+    diagram?: string;
     childrenIds?: string[];
     keyPoints?: KeyPoint[];
     examples?: Example[];
