@@ -1,9 +1,6 @@
 
 import { Part, ContentBlock } from './types';
 
-// --- CONTENT REGISTRY (FLAT MAP) ---
-// This acts as the database. Every ID in the syllabus maps to a block here.
-
 export const CONTENT_REGISTRY: Record<string, ContentBlock> = {
   // === CHAPTER 1 ===
   "ch1": {
@@ -24,7 +21,6 @@ export const CONTENT_REGISTRY: Record<string, ContentBlock> = {
     id: "1.1.1",
     type: "subsection",
     title: "1.1.1 存储程序工作方式",
-    description: "这是计算机组成原理中最基础的理论基石，由冯·诺依曼提出。",
     keyPoints: [
       {
         title: "冯·诺依曼体制核心",
@@ -48,7 +44,6 @@ export const CONTENT_REGISTRY: Record<string, ContentBlock> = {
     id: "1.1.2",
     type: "subsection",
     title: "1.1.2 信息的数字化表示",
-    description: "为什么计算机要使用二进制？",
     keyPoints: [
       {
         title: "二进制的优势",
@@ -60,7 +55,6 @@ export const CONTENT_REGISTRY: Record<string, ContentBlock> = {
     id: "1.2",
     type: "section",
     title: "1.2 计算机系统的硬件和软件组成",
-    description: "硬件是躯体，软件是灵魂。",
     childrenIds: ["1.2.1", "1.2.2"]
   },
   "1.2.1": {
@@ -93,13 +87,12 @@ export const CONTENT_REGISTRY: Record<string, ContentBlock> = {
     id: "1.3",
     type: "section",
     title: "1.3 层次结构模型",
-    description: "计算机系统是一个复杂的层次结构，从底层硬件到上层应用。",
-    childrenIds: ["1.3.1", "1.3.2"]
+    childrenIds: ["1.3.1", "1.3.2", "1.3.3"]
   },
   "1.3.1": {
     id: "1.3.1",
     type: "subsection",
-    title: "1.3.1 多级层次结构",
+    title: "1.3.1 从计算机系统组成角度划分层次结构",
     keyPoints: [
       {
         title: "五个层次",
@@ -111,24 +104,46 @@ export const CONTENT_REGISTRY: Record<string, ContentBlock> = {
   "1.3.2": {
     id: "1.3.2",
     type: "subsection",
-    title: "1.3.2 软硬件逻辑等价性",
+    title: "1.3.2 从语言功能角度划分层次结构",
     keyPoints: [
       {
-        title: "逻辑等价性",
-        content: "任何由软件实现的操作（如乘法）都可以由硬件直接实现；任何由硬件实现的操作也可以由软件模拟。\n选择标准：性价比、速度（硬件快）、灵活性（软件好）。"
+        title: "高级语言与机器语言",
+        content: "高级语言需要通过编译器或解释器转换为机器语言才能执行。编译程序将源程序一次性翻译；解释程序逐条翻译执行。"
       }
+    ]
+  },
+  "1.3.3": {
+    id: "1.3.3",
+    type: "subsection",
+    title: "1.3.3 软件和硬件在逻辑上的等价",
+    keyPoints: [
+        {
+            title: "逻辑等价性",
+            content: "任何由软件实现的操作（如浮点运算、乘法）都可以由硬件直接实现；任何由硬件实现的操作也可以由软件模拟。\n选择标准：性价比、速度（硬件快）、灵活性（软件好）。"
+        }
     ]
   },
   "1.4": {
     id: "1.4",
     type: "section",
     title: "1.4 计算机的工作过程",
-    childrenIds: ["1.4.1"]
+    childrenIds: ["1.4.1", "1.4.2"]
   },
   "1.4.1": {
     id: "1.4.1",
     type: "subsection",
-    title: "1.4.1 指令执行过程",
+    title: "1.4.1 处理问题的步骤",
+    keyPoints: [
+        {
+            title: "步骤",
+            content: "1. 系统分析与设计 (建模)\n2. 编制程序 (高级语言)\n3. 编译/汇编 (生成目标代码)\n4. 链接 (生成可执行文件)\n5. 执行"
+        }
+    ]
+  },
+  "1.4.2": {
+    id: "1.4.2",
+    type: "subsection",
+    title: "1.4.2 指令执行过程",
     keyPoints: [
       {
         title: "基本周期",
@@ -145,7 +160,6 @@ export const CONTENT_REGISTRY: Record<string, ContentBlock> = {
     id: "1.5",
     type: "section",
     title: "1.5 计算机的特点和性能指标",
-    description: "本章唯一的计算大题出处。",
     childrenIds: ["1.5.1", "1.5.2"]
   },
   "1.5.1": {
@@ -155,7 +169,7 @@ export const CONTENT_REGISTRY: Record<string, ContentBlock> = {
     keyPoints: [
       {
         title: "主要特点",
-        content: "运算速度快、计算精度高、记忆能力强、逻辑判断能力、自动控制能力。"
+        content: "1. 运算速度快\n2. 计算精度高\n3. 记忆能力强\n4. 具有逻辑判断能力\n5. 具有自动控制能力"
       }
     ]
   },
@@ -176,8 +190,8 @@ export const CONTENT_REGISTRY: Record<string, ContentBlock> = {
         ]
       },
       {
-        title: "Amdahl定律",
-        content: "加速比 S = 1 / ((1 - Fe) + Fe / Se)\nFe: 可改进部分的比例\nSe: 改进部分的加速倍数"
+        title: "字长",
+        content: "CPU一次能处理的二进制数据的位数。直接影响精度和范围。"
       }
     ],
     examples: [
@@ -192,18 +206,44 @@ export const CONTENT_REGISTRY: Record<string, ContentBlock> = {
     id: "1.6",
     type: "section",
     title: "1.6 计算机的发展与应用",
-    childrenIds: ["1.6.1"]
+    childrenIds: ["1.6.1", "1.6.2", "1.6.3"]
   },
   "1.6.1": {
     id: "1.6.1",
     type: "subsection",
-    title: "1.6.1 摩尔定律",
+    title: "1.6.1 计算机的发展历程",
     keyPoints: [
       {
-        title: "Moore's Law",
-        content: "集成电路芯片上所集成的晶体管数目，每隔 18-24 个月翻一番，性能提升一倍，价格降低一半。"
+        title: "四代发展",
+        content: "第一代：电子管 (机器语言)\n第二代：晶体管 (高级语言)\n第三代：中小规模集成电路 (操作系统)\n第四代：大规模/超大规模集成电路 (微处理器)"
       }
     ]
+  },
+  "1.6.2": {
+      id: "1.6.2",
+      type: "subsection",
+      title: "1.6.2 计算机性能提高的技术",
+      keyPoints: [
+          {
+              title: "摩尔定律",
+              content: "集成电路芯片上所集成的晶体管数目，每隔 18-24 个月翻一番。"
+          },
+          {
+              title: "并行处理技术",
+              content: "流水线技术、多核技术、多处理器系统。"
+          }
+      ]
+  },
+  "1.6.3": {
+      id: "1.6.3",
+      type: "subsection",
+      title: "1.6.3 计算机应用举例",
+      keyPoints: [
+          {
+              title: "应用领域",
+              content: "科学计算、数据处理、过程控制、人工智能 (AI)、网络通信。"
+          }
+      ]
   },
 
   // === CHAPTER 2 ===
@@ -218,7 +258,6 @@ export const CONTENT_REGISTRY: Record<string, ContentBlock> = {
     id: "2.1",
     type: "section",
     title: "2.1 数值型数据的表示",
-    description: "定点数处理整数和小数，浮点数处理极大极小值。",
     childrenIds: ["2.1.1", "2.1.2"]
   },
   "2.1.1": {
@@ -248,7 +287,6 @@ export const CONTENT_REGISTRY: Record<string, ContentBlock> = {
     id: "2.1.2",
     type: "subsection",
     title: "2.1.2 定点数与浮点数 (IEEE754)",
-    description: "本节是全书第一个难点，尤其是IEEE754转换。",
     keyPoints: [
       {
         title: "IEEE 754 单精度浮点数 (32位)",
@@ -272,33 +310,55 @@ export const CONTENT_REGISTRY: Record<string, ContentBlock> = {
     id: "2.2",
     type: "section",
     title: "2.2 字符的表示",
-    childrenIds: ["2.2.1"]
+    childrenIds: ["2.2.1", "2.2.2", "2.2.3"]
   },
   "2.2.1": {
     id: "2.2.1",
     type: "subsection",
-    title: "2.2.1 ASCII与Unicode",
+    title: "2.2.1 ASCII",
     keyPoints: [
       {
         title: "ASCII",
         content: "7位编码，共128个字符。最高位通常为0或作奇偶校验。"
-      },
-      {
-        title: "汉字编码",
-        content: "国标码 (GB2312) -> 机内码 (GB2312 + 8080H) 以区分ASCII。"
       }
     ]
+  },
+  "2.2.2": {
+    id: "2.2.2",
+    type: "subsection",
+    title: "2.2.2 Unicode 编码",
+    keyPoints: [
+        {
+            title: "Unicode",
+            content: "统一码，为世界上所有字符提供唯一编号。常见实现：UTF-8 (变长), UTF-16。"
+        }
+    ]
+  },
+  "2.2.3": {
+      id: "2.2.3",
+      type: "subsection",
+      title: "2.2.3 汉字编码简介",
+      keyPoints: [
+          {
+              title: "汉字处理流程",
+              content: "输入码 (拼音/五笔) -> 国标码 (交换码) -> 机内码 (存储码) -> 字形码 (输出码)。"
+          },
+          {
+              title: "机内码计算",
+              content: "机内码 = 国标码 + 8080H (将最高位置1，以区分ASCII)。"
+          }
+      ]
   },
   "2.3": {
     id: "2.3",
     type: "section",
     title: "2.3 指令信息的表示",
-    childrenIds: ["2.3.1", "2.3.2"]
+    childrenIds: ["2.3.1", "2.3.2", "2.3.3", "2.3.4", "2.3.5", "2.3.6", "2.3.7"]
   },
   "2.3.1": {
     id: "2.3.1",
     type: "subsection",
-    title: "2.3.1 指令格式与操作码",
+    title: "2.3.1 指令格式",
     keyPoints: [
       {
         title: "指令组成",
@@ -313,13 +373,68 @@ export const CONTENT_REGISTRY: Record<string, ContentBlock> = {
   "2.3.2": {
     id: "2.3.2",
     type: "subsection",
-    title: "2.3.2 寻址方式概述",
+    title: "2.3.2 常用寻址方式",
     keyPoints: [
       {
         title: "常见方式",
-        content: "立即寻址 (Operand in instruction)\n直接寻址 (Addr in instruction)\n间接寻址 (Addr points to Addr)\n寄存器寻址 (In Register)\n寄存器间接寻址 (Reg holds Addr)"
+        content: "1. 立即寻址 (Operand in instruction)\n2. 直接寻址 (Addr in instruction)\n3. 间接寻址 (Addr points to Addr)\n4. 寄存器寻址 (In Register)\n5. 寄存器间接寻址 (Reg holds Addr)"
       }
     ]
+  },
+  "2.3.3": {
+      id: "2.3.3",
+      type: "subsection",
+      title: "2.3.3 指令类型",
+      keyPoints: [
+          {
+              title: "分类",
+              content: "数据传送类、算术逻辑运算类、移位类、程序控制类 (跳转/调用)、输入输出类。"
+          }
+      ]
+  },
+  "2.3.4": {
+      id: "2.3.4",
+      type: "subsection",
+      title: "2.3.4 Pentium II 指令格式",
+      keyPoints: [
+          {
+              title: "变长指令",
+              content: "x86 指令长度不固定，从 1 字节到 15 字节不等。"
+          }
+      ]
+  },
+  "2.3.5": {
+      id: "2.3.5",
+      type: "subsection",
+      title: "2.3.5 RISC 概述",
+      keyPoints: [
+          {
+              title: "RISC 特点",
+              content: "1. 指令少且简单\n2. 寻址方式少\n3. 指令长度固定\n4. 大量使用寄存器\n5. 硬布线控制为主\n6. 优化流水线"
+          }
+      ]
+  },
+  "2.3.6": {
+      id: "2.3.6",
+      type: "subsection",
+      title: "2.3.6 MIPS 指令系统",
+      keyPoints: [
+          {
+              title: "MIPS 格式",
+              content: "R型 (寄存器-寄存器), I型 (立即数/分支), J型 (跳转)。均为32位定长。"
+          }
+      ]
+  },
+  "2.3.7": {
+      id: "2.3.7",
+      type: "subsection",
+      title: "2.3.7 ARM 指令系统",
+      keyPoints: [
+          {
+              title: "ARM 特点",
+              content: "大多数指令可条件执行 (Conditional Execution)，拥有丰富的桶形移位器。"
+          }
+      ]
   },
 
   // === CHAPTER 3 ===
@@ -328,57 +443,98 @@ export const CONTENT_REGISTRY: Record<string, ContentBlock> = {
     type: "chapter",
     title: "第3章 微体系结构层",
     description: "本章进入CPU内部，理解数据通路和控制逻辑，以及流水线技术。",
-    childrenIds: ["3.1", "3.2", "3.3"]
+    childrenIds: ["3.1", "3.2", "3.3", "3.4", "3.5", "3.6"]
   },
-  "3.1": { id: "3.1", type: "section", title: "3.1 CPU的数据通路", childrenIds: ["3.1.1", "3.1.2"] },
+  "3.1": { id: "3.1", type: "section", title: "3.1 CPU 的组成和功能", childrenIds: ["3.1.1", "3.1.2", "3.1.3", "3.1.4"] },
   "3.1.1": {
     id: "3.1.1",
     type: "subsection",
-    title: "3.1.1 单总线结构",
-    keyPoints: [{ title: "特点", content: "所有部件挂在一条总线上，同一时刻只能有一个数据传输。结构简单但存在瓶颈。" }]
+    title: "3.1.1 CPU 的组成",
+    keyPoints: [{ title: "组成部件", content: "ALU (运算器), CU (控制器), Registers (寄存器组 - PC, IR, MAR, MDR, GPRs)。" }]
   },
   "3.1.2": {
-    id: "3.1.2",
-    type: "subsection",
-    title: "3.1.2 多总线结构",
-    keyPoints: [{ title: "特点", content: "如三总线（数据、地址、控制或输入、输出、DMA），支持并行传输，效率高。" }]
+      id: "3.1.2",
+      type: "subsection",
+      title: "3.1.2 指令执行过程",
+      keyPoints: [{ title: "过程", content: "取指 -> 译码 -> 执行 -> 访存 -> 写回。" }]
   },
-  "3.2": { id: "3.2", type: "section", title: "3.2 控制单元的设计", childrenIds: ["3.2.1", "3.2.2"] },
+  "3.1.3": {
+      id: "3.1.3",
+      type: "subsection",
+      title: "3.1.3 时序控制方式",
+      keyPoints: [{ title: "方式", content: "同步控制 (统一时钟)、异步控制 (应答机制)、联合控制。" }]
+  },
+  "3.1.4": {
+      id: "3.1.4",
+      type: "subsection",
+      title: "3.1.4 指令流水线",
+      keyPoints: [{ title: "概念", content: "将指令执行过程分解为若干子过程，并行处理，提高吞吐率。" }]
+  },
+  "3.2": { id: "3.2", type: "section", title: "3.2 ALU 和运算方法", childrenIds: ["3.2.1", "3.2.2", "3.2.3", "3.2.4"] },
   "3.2.1": {
     id: "3.2.1",
     type: "subsection",
-    title: "3.2.1 硬布线控制器",
-    keyPoints: [{ title: "原理", content: "使用组合逻辑电路（门电路）产生控制信号。\n优点：速度快（RISC常用）。\n缺点：设计复杂，修改困难。" }]
+    title: "3.2.1 ALU 介绍",
+    keyPoints: [{ title: "ALU", content: "算术逻辑单元，核心部件，完成加减乘除、逻辑与或非等操作。" }]
   },
   "3.2.2": {
-    id: "3.2.2",
+      id: "3.2.2",
+      type: "subsection",
+      title: "3.2.2 定点数运算方法",
+      keyPoints: [
+          { title: "补码加减法", content: "[X+Y]补 = [X]补 + [Y]补; [X-Y]补 = [X]补 + [-Y]补。" },
+          { title: "溢出判断", content: "1. 单符号位：结果符号位与操作数符号位矛盾。\n2. 双符号位：01上溢，10下溢。", isExamFocus: true }
+      ]
+  },
+  "3.2.3": {
+      id: "3.2.3",
+      type: "subsection",
+      title: "3.2.3 浮点数运算方法",
+      keyPoints: [{ title: "步骤", content: "1. 对阶 (小阶向大阶看齐)\n2. 尾数运算\n3. 规格化 (左规/右规)\n4. 舍入\n5. 溢出判断" }]
+  },
+  "3.2.4": {
+      id: "3.2.4",
+      type: "subsection",
+      title: "3.2.4 十进制数加、减运算",
+      keyPoints: [{ title: "BCD码", content: "8421码，加法修正时，若结果>9或有进位，需加6修正。" }]
+  },
+  "3.3": { id: "3.3", type: "section", title: "3.3 CPU 模型机的组成及其数据通路", childrenIds: ["3.3.1", "3.3.2"] },
+  "3.3.1": {
+      id: "3.3.1",
+      type: "subsection",
+      title: "3.3.1 基本组成",
+      keyPoints: [{ title: "总线结构", content: "单总线、双总线、三总线结构。" }]
+  },
+  "3.3.2": {
+      id: "3.3.2",
+      type: "subsection",
+      title: "3.3.2 数据传输",
+      keyPoints: [{ title: "寄存器传送", content: "MOV R1, R2。数据通过总线从R2传送到R1。" }]
+  },
+  "3.4": { id: "3.4", type: "section", title: "3.4 组合逻辑控制器原理", childrenIds: ["3.4.1", "3.4.2", "3.4.3", "3.4.4", "3.4.5"] },
+  "3.4.1": { id: "3.4.1", type: "subsection", title: "3.4.1 模型机的指令系统", keyPoints: [{ title: "指令集", content: "定义模型机支持的指令集合。" }] },
+  "3.4.2": { id: "3.4.2", type: "subsection", title: "3.4.2 模型机的时序系统", keyPoints: [{ title: "时序", content: "时钟周期、机器周期、指令周期。" }] },
+  "3.4.3": { id: "3.4.3", type: "subsection", title: "3.4.3 指令流程", keyPoints: [{ title: "微操作流程", content: "分析每条指令在每个周期的具体微操作。" }] },
+  "3.4.4": { id: "3.4.4", type: "subsection", title: "3.4.4 微命令的综合与产生", keyPoints: [{ title: "逻辑表达式", content: "利用布尔代数综合出每个控制信号的逻辑表达式。" }] },
+  "3.4.5": { id: "3.4.5", type: "subsection", title: "3.4.5 小结", keyPoints: [{ title: "优缺点", content: "硬布线控制器速度快，但设计复杂，一旦成型难以修改。" }] },
+  "3.5": { id: "3.5", type: "section", title: "3.5 微程序控制器原理", childrenIds: ["3.5.1", "3.5.2", "3.5.3", "3.5.4", "3.5.5"] },
+  "3.5.1": {
+    id: "3.5.1",
     type: "subsection",
-    title: "3.2.2 微程序控制器",
+    title: "3.5.1 微程序控制概念",
     keyPoints: [
       { title: "原理", content: "将控制信号编码成微指令，存放在控制存储器（CM）中。执行机器指令就是执行一段微程序。" },
       { title: "概念辨析", content: "微命令 -> 微指令 -> 微程序 -> 机器指令。\nCM（ROM） vs 主存（RAM）。", isExamFocus: true }
     ]
   },
-  "3.3": { id: "3.3", type: "section", title: "3.3 指令流水线", childrenIds: ["3.3.1", "3.3.2"] },
-  "3.3.1": {
-    id: "3.3.1",
-    type: "subsection",
-    title: "3.3.1 流水线原理",
-    keyPoints: [
-      { title: "五级流水", content: "IF (取指) -> ID (译码) -> EX (执行) -> MEM (访存) -> WB (写回)。" },
-      { title: "加速比", content: "理想情况下，CPI趋近于1。S = nk / (n + k - 1) ≈ k (n很大时)。" }
-    ]
-  },
-  "3.3.2": {
-    id: "3.3.2",
-    type: "subsection",
-    title: "3.3.2 流水线冒险",
-    keyPoints: [
-      { title: "结构冒险", content: "资源冲突（如同时访问内存）。解决：指令/数据Cache分离。" },
-      { title: "数据冒险", content: "RAW (Read After Write)。解决：数据旁路 (Forwarding)、暂停 (Stall)。" },
-      { title: "控制冒险", content: "分支指令导致PC改变。解决：分支预测、延迟槽。" }
-    ]
-  },
+  "3.5.2": { id: "3.5.2", type: "subsection", title: "3.5.2 微指令编码方式", keyPoints: [{ title: "编码", content: "直接控制法 (一位一控)、字段编码法 (互斥微命令分组)、混合编码法。" }] },
+  "3.5.3": { id: "3.5.3", type: "subsection", title: "3.5.3 微程序的顺序控制", keyPoints: [{ title: "下址生成", content: "断定法 (由微指令下址字段指定)、计数器法 (uPC+1)。" }] },
+  "3.5.4": { id: "3.5.4", type: "subsection", title: "3.5.4 微指令格式", keyPoints: [{ title: "格式", content: "水平型 (并行度高, 字长长, 执行快), 垂直型 (类似机器指令, 字长短, 执行慢)。" }] },
+  "3.5.5": { id: "3.5.5", type: "subsection", title: "3.5.5 典型微指令举例", keyPoints: [{ title: "实例", content: "模型机微指令格式分析。" }] },
+  "3.6": { id: "3.6", type: "section", title: "3.6 典型 RISC 处理器微体系结构", childrenIds: ["3.6.1", "3.6.2"] },
+  "3.6.1": { id: "3.6.1", type: "subsection", title: "3.6.1 MIPS R4000", keyPoints: [{ title: "R4000", content: "超流水线结构，8级流水。" }] },
+  "3.6.2": { id: "3.6.2", type: "subsection", title: "3.6.2 ARM7", keyPoints: [{ title: "ARM7", content: "冯·诺依曼结构，3级流水 (取指、译码、执行)。" }] },
+
 
   // === CHAPTER 4 ===
   "ch4": {
@@ -386,30 +542,47 @@ export const CONTENT_REGISTRY: Record<string, ContentBlock> = {
     type: "chapter",
     title: "第4章 指令系统层",
     description: "深入了解指令集架构 (ISA)，特别是 x86 体系。",
-    childrenIds: ["4.1", "4.2"]
+    childrenIds: ["4.1", "4.2", "4.3"]
   },
-  "4.1": { id: "4.1", type: "section", title: "4.1 指令系统体系结构", childrenIds: ["4.1.1"] },
-  "4.1.1": {
-    id: "4.1.1",
-    type: "subsection",
-    title: "4.1.1 CISC vs RISC",
-    keyPoints: [
-      { title: "CISC (复杂指令集)", content: "指令多且复杂，变长，微程序控制。代表：x86。" },
-      { title: "RISC (精简指令集)", content: "指令少且简单，定长，硬布线控制，依赖编译器优化。代表：ARM, MIPS, RISC-V。", isExamFocus: true }
-    ]
-  },
-  "4.2": { id: "4.2", type: "section", title: "4.2 寻址方式详解", childrenIds: ["4.2.1"] },
+  "4.1": { id: "4.1", type: "section", title: "4.1 80x86 CPU", childrenIds: ["4.1.1", "4.1.2", "4.1.3"] },
+  "4.1.1": { id: "4.1.1", type: "subsection", title: "4.1.1 8086/8088 CPU", keyPoints: [{ title: "16位CPU", content: "20位地址总线 (1MB寻址)，16位数据总线。引入指令队列。" }] },
+  "4.1.2": { id: "4.1.2", type: "subsection", title: "4.1.2 80386/80486 CPU", keyPoints: [{ title: "32位CPU", content: "32位地址总线 (4GB寻址)。保护模式，虚拟存储。" }] },
+  "4.1.3": { id: "4.1.3", type: "subsection", title: "4.1.3 Pentium 系列 CPU", keyPoints: [{ title: "超标量", content: "U、V双流水线，分支预测，MMX技术。" }] },
+  "4.2": { id: "4.2", type: "section", title: "4.2 80x86 CPU 的寄存器和主存储器", childrenIds: ["4.2.1", "4.2.2"] },
   "4.2.1": {
     id: "4.2.1",
     type: "subsection",
-    title: "4.2.1 基本寻址方式",
-    description: "掌握有效地址 EA 的计算。",
+    title: "4.2.1 80x86 CPU 的寄存器",
     keyPoints: [
-      { title: "相对寻址", content: "EA = (PC) + Offset。用于相对跳转（循环、if）。" },
-      { title: "基址寻址", content: "EA = (BaseReg) + Offset。用于多道程序重定位。" },
-      { title: "变址寻址", content: "EA = (IndexReg) + Offset。用于数组访问。", isExamFocus: true }
+        { title: "通用寄存器", content: "AX, BX, CX, DX, SI, DI, SP, BP。" },
+        { title: "段寄存器", content: "CS (代码), DS (数据), SS (堆栈), ES (附加)。" },
+        { title: "标志寄存器", content: "ZF, SF, CF, OF, IF, DF。" }
     ]
   },
+  "4.2.2": {
+      id: "4.2.2",
+      type: "subsection",
+      title: "4.2.2 80x86 的主存储器",
+      keyPoints: [
+          { title: "分段管理", content: "逻辑地址 = 段基址:偏移量。物理地址 = 段基址 × 16 + 偏移量。", isExamFocus: true },
+          { title: "Little Endian", content: "小端存储：低字节存放在低地址。" }
+      ]
+  },
+  "4.3": { id: "4.3", type: "section", title: "4.3 80x86 CPU 指令系统", childrenIds: ["4.3.1", "4.3.2", "4.3.3", "4.3.4", "4.3.5", "4.3.6", "4.3.7"] },
+  "4.3.1": {
+      id: "4.3.1",
+      type: "subsection",
+      title: "4.3.1 80x86 寻址方式",
+      keyPoints: [
+          { title: "寻址", content: "立即、寄存器、直接、寄存器间接、寄存器相对、基址变址、相对基址变址。" }
+      ]
+  },
+  "4.3.2": { id: "4.3.2", type: "subsection", title: "4.3.2 80x86 CPU 指令分类", keyPoints: [{ title: "分类", content: "传送、算术、逻辑、串操作、控制转移、处理机控制。" }] },
+  "4.3.3": { id: "4.3.3", type: "subsection", title: "4.3.3 传送类指令", keyPoints: [{ title: "MOV, PUSH, POP, XCHG", content: "MOV A, B (B->A)。PUSH入栈(SP-2)，POP出栈(SP+2)。" }] },
+  "4.3.4": { id: "4.3.4", type: "subsection", title: "4.3.4 算术运算类指令", keyPoints: [{ title: "ADD, SUB, MUL, DIV", content: "ADD/SUB 影响标志位。INC/DEC 不影响CF。" }] },
+  "4.3.5": { id: "4.3.5", type: "subsection", title: "4.3.5 逻辑类指令", keyPoints: [{ title: "AND, OR, XOR, TEST", content: "逻辑运算按位进行。TEST 同 AND 但不回写结果，只置标志位。" }] },
+  "4.3.6": { id: "4.3.6", type: "subsection", title: "4.3.6 串操作类指令", keyPoints: [{ title: "MOVS, STOS, LODS", content: "配合 REP 前缀使用。SI/DI 自动增减。" }] },
+  "4.3.7": { id: "4.3.7", type: "subsection", title: "4.3.7 处理机控制类指令", keyPoints: [{ title: "CLC, STC, CLI, STI", content: "标志位操作。HLT 停机。" }] },
 
   // === CHAPTER 5 ===
   "ch5": {
@@ -417,28 +590,41 @@ export const CONTENT_REGISTRY: Record<string, ContentBlock> = {
     type: "chapter",
     title: "第5章 汇编语言层",
     description: "汇编语言是机器语言的助记符表示，理解底层堆栈和函数调用。",
-    childrenIds: ["5.1", "5.2"]
+    childrenIds: ["5.1", "5.2", "5.3", "5.4", "5.5", "5.6"]
   },
-  "5.1": { id: "5.1", type: "section", title: "5.1 汇编基础", childrenIds: ["5.1.1"] },
-  "5.1.1": {
-    id: "5.1.1",
-    type: "subsection",
-    title: "5.1.1 语句格式",
-    keyPoints: [{ title: "格式", content: "[Label:] Mnemonic [Operands] [;Comment]\n例如: LOOP: ADD AX, BX ; AX = AX + BX" }]
-  },
-  "5.2": { id: "5.2", type: "section", title: "5.2 程序流程控制", childrenIds: ["5.2.1", "5.2.2"] },
+  "5.1": { id: "5.1", type: "section", title: "5.1 汇编语言层概述", childrenIds: ["5.1.1"] },
+  "5.1.1": { id: "5.1.1", type: "subsection", title: "5.1.1 汇编程序", keyPoints: [{ title: "作用", content: "将汇编源程序翻译成机器目标程序。" }] },
+  "5.2": { id: "5.2", type: "section", title: "5.2 汇编语言语句格式", childrenIds: ["5.2.1"] },
   "5.2.1": {
     id: "5.2.1",
     type: "subsection",
-    title: "5.2.1 顺序与分支",
-    keyPoints: [{ title: "标志寄存器", content: "CF(进位), ZF(零), SF(符号), OF(溢出)。\nCMP A, B 后根据标志位跳转 (JE, JNE, JG, JL)。" }]
+    title: "5.2.1 语句格式",
+    keyPoints: [{ title: "格式", content: "[Label:] Mnemonic [Operands] [;Comment]\n例如: LOOP: ADD AX, BX ; AX = AX + BX" }]
   },
-  "5.2.2": {
-    id: "5.2.2",
-    type: "subsection",
-    title: "5.2.2 循环与子程序",
-    keyPoints: [{ title: "栈操作", content: "PUSH, POP。栈底高地址，栈顶低地址。\nCALL指令：PUSH PC, JMP Target。\nRET指令：POP PC。" }]
-  },
+  "5.3": { id: "5.3", type: "section", title: "5.3 80x86 宏汇编语言数据、表达式和运算符", childrenIds: ["5.3.1", "5.3.2", "5.3.3", "5.3.4"] },
+  "5.3.1": { id: "5.3.1", type: "subsection", title: "5.3.1 常数", keyPoints: [{ title: "类型", content: "二进制(B), 八进制(Q), 十进制(D), 十六进制(H), 字符串('A')。" }] },
+  "5.3.2": { id: "5.3.2", type: "subsection", title: "5.3.2 变量", keyPoints: [{ title: "定义", content: "DB (字节), DW (字), DD (双字)。" }] },
+  "5.3.3": { id: "5.3.3", type: "subsection", title: "5.3.3 标号", keyPoints: [{ title: "标号", content: "指令的符号地址，具有段、偏移、类型属性。" }] },
+  "5.3.4": { id: "5.3.4", type: "subsection", title: "5.3.4 表达式与运算符", keyPoints: [{ title: "运算符", content: "算术运算符 (+-*/), 逻辑运算符 (AND/OR), 属性运算符 (PTR, SEG, OFFSET)。" }] },
+  "5.4": { id: "5.4", type: "section", title: "5.4 80x86 宏汇编语言伪指令", childrenIds: ["5.4.1", "5.4.2", "5.4.3", "5.4.4", "5.4.5", "5.4.6", "5.4.7", "5.4.8", "5.4.9"] },
+  "5.4.1": { id: "5.4.1", type: "subsection", title: "5.4.1 符号定义语句", keyPoints: [{ title: "EQU, =", content: "COUNT EQU 100。= 可以重定义。" }] },
+  "5.4.2": { id: "5.4.2", type: "subsection", title: "5.4.2 处理器选择", keyPoints: [{ title: ".386", content: "指定指令集。" }] },
+  "5.4.3": { id: "5.4.3", type: "subsection", title: "5.4.3 段结构伪指令", keyPoints: [{ title: "SEGMENT/ENDS", content: "定义段的开始和结束。" }] },
+  "5.4.4": { id: "5.4.4", type: "subsection", title: "5.4.4 段组伪指令", keyPoints: [{ title: "GROUP", content: "将多个段归并为一个组。" }] },
+  "5.4.5": { id: "5.4.5", type: "subsection", title: "5.4.5 内存模式", keyPoints: [{ title: ".MODEL", content: "SMALL, COMPACT, LARGE 等。" }] },
+  "5.4.6": { id: "5.4.6", type: "subsection", title: "5.4.6 定位和对准", keyPoints: [{ title: "ORG, ALIGN", content: "ORG 100H (指定偏移地址)。" }] },
+  "5.4.7": { id: "5.4.7", type: "subsection", title: "5.4.7 过程定义", keyPoints: [{ title: "PROC/ENDP", content: "NEAR/FAR 属性。" }] },
+  "5.4.8": { id: "5.4.8", type: "subsection", title: "5.4.8 包含伪指令", keyPoints: [{ title: "INCLUDE", content: "包含其他文件。" }] },
+  "5.4.9": { id: "5.4.9", type: "subsection", title: "5.4.9 标题伪指令", keyPoints: [{ title: "TITLE", content: "指定程序标题。" }] },
+  "5.5": { id: "5.5", type: "section", title: "5.5 宏指令", childrenIds: [] },
+  "5.6": { id: "5.6", type: "section", title: "5.6 汇编语言程序设计基本技术", childrenIds: ["5.6.1", "5.6.2", "5.6.3", "5.6.4", "5.6.5", "5.6.6", "5.6.7"] },
+  "5.6.1": { id: "5.6.1", type: "subsection", title: "5.6.1 程序设计步骤", keyPoints: [{ title: "步骤", content: "分析问题 -> 确定算法 -> 绘流程图 -> 编写代码 -> 调试。" }] },
+  "5.6.2": { id: "5.6.2", type: "subsection", title: "5.6.2 顺序程序设计", keyPoints: [{ title: "顺序", content: "按指令书写先后顺序执行。" }] },
+  "5.6.3": { id: "5.6.3", type: "subsection", title: "5.6.3 分支程序设计", keyPoints: [{ title: "分支", content: "利用条件转移指令 (JZ, JNZ, JC) 实现 IF-ELSE。" }] },
+  "5.6.4": { id: "5.6.4", type: "subsection", title: "5.6.4 循环程序设计", keyPoints: [{ title: "循环", content: "LOOP 指令 (CX计数)。结构：初始化 -> 循环体 -> 修改参数 -> 判断退出。" }] },
+  "5.6.5": { id: "5.6.5", type: "subsection", title: "5.6.5 子程序设计", keyPoints: [{ title: "子程序", content: "利用 CALL 和 RET。注意现场保护 (PUSH/POP)。" }] },
+  "5.6.6": { id: "5.6.6", type: "subsection", title: "5.6.6 系统功能子程序调用", keyPoints: [{ title: "INT 21H", content: "AH=01H(读字符), AH=02H(显字符), AH=09H(显字符串), AH=4CH(返回DOS)。", isExamFocus: true }] },
+  "5.6.7": { id: "5.6.7", type: "subsection", title: "5.6.7 汇编语言程序的开发", keyPoints: [{ title: "开发流程", content: "Edit -> Masm -> Link -> Debug。" }] },
 
   // === CHAPTER 6 ===
   "ch6": {
@@ -446,55 +632,62 @@ export const CONTENT_REGISTRY: Record<string, ContentBlock> = {
     type: "chapter",
     title: "第6章 存储系统",
     description: "存储墙问题与层次化存储结构，重点在 Cache 和虚拟存储器。",
-    childrenIds: ["6.1", "6.2", "6.3", "6.4"]
+    childrenIds: ["6.1", "6.2", "6.3", "6.4", "6.5", "6.6", "6.7"]
   },
-  "6.1": { id: "6.1", type: "section", title: "6.1 存储器概述", childrenIds: ["6.1.1"] },
-  "6.1.1": {
-    id: "6.1.1",
-    type: "subsection",
-    title: "6.1.1 分类与层级",
-    keyPoints: [{ title: "局部性原理", content: "时间局部性（循环）、空间局部性（数组）。这是Cache存在的基础。" }]
-  },
-  "6.2": { id: "6.2", type: "section", title: "6.2 主存储器", childrenIds: ["6.2.1"] },
-  "6.2.1": {
-    id: "6.2.1",
-    type: "subsection",
-    title: "6.2.1 存储扩展",
-    keyPoints: [
-      { title: "位扩展", content: "增加字长 (8位 -> 16位)。数据线并联。" },
-      { title: "字扩展", content: "增加容量 (1K -> 2K)。地址线高位做片选 (CS)。" },
-      { title: "多体并行", content: "高位交叉 (顺序)、低位交叉 (流水线，性能好)。" }
-    ]
-  },
-  "6.3": { id: "6.3", type: "section", title: "6.3 Cache", childrenIds: ["6.3.1", "6.3.2"] },
-  "6.3.1": {
-    id: "6.3.1",
-    type: "subsection",
-    title: "6.3.1 映射方式",
-    keyPoints: [
-      { title: "直接映射", content: "Addr % Lines。简单，冲突率高。", isExamFocus: true },
-      { title: "全相联", content: "任意放。冲突低，比较器贵。"},
-      { title: "组相联", content: "Addr % Sets。折中方案 (2路/4路常用)。"}
-    ],
-    examples: [{
-        question: "Cache容量16KB，块大小64B，采用2路组相联。主存地址32位，求Tag, Set, Offset位数。",
-        solution: "1. 块内偏移 Offset: 64B -> 6位。\n2. 组数 Sets: (16KB / 64B) / 2 = 128组 -> 7位。\n3. Tag: 32 - 7 - 6 = 19位。",
-        tip: "Tag + Set + Offset = Total Address Bits"
-    }]
-  },
+  "6.1": { id: "6.1", type: "section", title: "6.1 存储系统概述", childrenIds: ["6.1.1", "6.1.2"] },
+  "6.1.1": { id: "6.1.1", type: "subsection", title: "6.1.1 存储器的分类", keyPoints: [{ title: "分类", content: "按介质 (半导体/磁/光)，按存取方式 (RAM/ROM/SAM/DAM)，按作用 (主/辅/Cache)。" }] },
+  "6.1.2": { id: "6.1.2", type: "subsection", title: "6.1.2 主存的主要技术指标", keyPoints: [{ title: "指标", content: "存储容量、存取速度 (存取时间/存取周期)、存储带宽。" }] },
+  "6.2": { id: "6.2", type: "section", title: "6.2 存储原理", childrenIds: ["6.2.1", "6.2.2"] },
+  "6.2.1": { id: "6.2.1", type: "subsection", title: "6.2.1 半导体存储器", keyPoints: [{ title: "SRAM vs DRAM", content: "SRAM: 触发器，快，贵，做Cache。\nDRAM: 电容，慢，便宜，需刷新，做主存。", isExamFocus: true }] },
+  "6.2.2": { id: "6.2.2", type: "subsection", title: "6.2.2 磁表面存储器", keyPoints: [{ title: "原理", content: "利用磁性材料的磁化状态存储 0/1。" }] },
+  "6.3": { id: "6.3", type: "section", title: "6.3 主存储器的组织", childrenIds: ["6.3.1", "6.3.2", "6.3.3", "6.3.4"] },
+  "6.3.1": { id: "6.3.1", type: "subsection", title: "6.3.1 主存储器的逻辑设计", keyPoints: [{ title: "设计", content: "芯片选型、逻辑连接。" }] },
   "6.3.2": {
     id: "6.3.2",
     type: "subsection",
-    title: "6.3.2 替换算法",
-    keyPoints: [{ title: "算法", content: "RAND (随机), FIFO (先进先出), LRU (最近最少使用 - 最好)。" }]
+    title: "6.3.2 主存储器与 CPU 的连接",
+    keyPoints: [
+      { title: "位扩展", content: "增加字长 (8位 -> 16位)。数据线并联。" },
+      { title: "字扩展", content: "增加容量 (1K -> 2K)。地址线高位做片选 (CS)。", isExamFocus: true }
+    ]
   },
-  "6.4": { id: "6.4", type: "section", title: "6.4 虚拟存储器", childrenIds: ["6.4.1"] },
+  "6.3.3": { id: "6.3.3", type: "subsection", title: "6.3.3 Pentium CPU 与存储器组织", keyPoints: [{ title: "组织", content: "64位数据总线，8个字节选通信号 (BE0#-BE7#)。" }] },
+  "6.3.4": { id: "6.3.4", type: "subsection", title: "6.3.4 高级 DRAM", keyPoints: [{ title: "类型", content: "SDRAM (同步), DDR (双倍速率)。" }] },
+  "6.4": { id: "6.4", type: "section", title: "6.4 高速缓冲存储器", childrenIds: ["6.4.1", "6.4.2", "6.4.3"] },
   "6.4.1": {
-    id: "6.4.1",
-    type: "subsection",
-    title: "6.4.1 页式虚拟存储器",
-    keyPoints: [{ title: "TLB (快表)", content: "TLB是页表的Cache，用于加速虚拟地址到物理地址的转换。" }]
+      id: "6.4.1",
+      type: "subsection",
+      title: "6.4.1 Cache 的工作原理",
+      keyPoints: [{ title: "局部性原理", content: "时间局部性（循环）、空间局部性（数组）。" }]
   },
+  "6.4.2": {
+      id: "6.4.2",
+      type: "subsection",
+      title: "6.4.2 Cache 的组织",
+      keyPoints: [
+          { title: "映射方式", content: "直接映射、全相联、组相联。", isExamFocus: true },
+          { title: "替换算法", content: "RAND, FIFO, LRU (近期最少使用)。" },
+          { title: "写策略", content: "写回法 (Write Back), 写直达法 (Write Through)。" }
+      ],
+      examples: [{
+          question: "Cache容量16KB，块大小64B，采用2路组相联。主存地址32位，求Tag, Set, Offset位数。",
+          solution: "1. 块内偏移 Offset: 64B -> 6位。\n2. 组数 Sets: (16KB / 64B) / 2 = 128组 -> 7位。\n3. Tag: 32 - 7 - 6 = 19位。",
+          tip: "Tag + Set + Offset = Total Address Bits"
+      }]
+  },
+  "6.4.3": { id: "6.4.3", type: "subsection", title: "6.4.3 Pentium II Cache", keyPoints: [{ title: "结构", content: "L1 (指令/数据分离), L2 (统一)。" }] },
+  "6.5": { id: "6.5", type: "section", title: "6.5 外部存储器", childrenIds: ["6.5.1", "6.5.2"] },
+  "6.5.1": { id: "6.5.1", type: "subsection", title: "6.5.1 硬磁盘存储器", keyPoints: [{ title: "指标", content: "寻道时间 + 旋转延迟 + 传输时间。" }] },
+  "6.5.2": { id: "6.5.2", type: "subsection", title: "6.5.2 U盘和固态硬盘", keyPoints: [{ title: "SSD", content: "基于Flash Memory，无机械部件，速度快。" }] },
+  "6.6": { id: "6.6", type: "section", title: "6.6 物理存储系统的组织", childrenIds: ["6.6.1", "6.6.2", "6.6.3"] },
+  "6.6.1": { id: "6.6.1", type: "subsection", title: "6.6.1 层次结构", keyPoints: [{ title: "金字塔", content: "Reg - L1 - L2 - Main Mem - Disk。" }] },
+  "6.6.2": { id: "6.6.2", type: "subsection", title: "6.6.2 磁盘阵列", keyPoints: [{ title: "RAID", content: "RAID0 (条带), RAID1 (镜像), RAID5 (分布式校验)。" }] },
+  "6.6.3": { id: "6.6.3", type: "subsection", title: "6.6.3 多体交叉存取", keyPoints: [{ title: "交叉", content: "低位交叉（流水线访问），提高带宽。" }] },
+  "6.7": { id: "6.7", type: "section", title: "6.7 虚拟存储系统的组织", childrenIds: ["6.7.1", "6.7.2", "6.7.3", "6.7.4"] },
+  "6.7.1": { id: "6.7.1", type: "subsection", title: "6.7.1 概述", keyPoints: [{ title: "目的", content: "扩大逻辑存储容量。" }] },
+  "6.7.2": { id: "6.7.2", type: "subsection", title: "6.7.2 组织方式", keyPoints: [{ title: "方式", content: "页式、段式、段页式。" }] },
+  "6.7.3": { id: "6.7.3", type: "subsection", title: "6.7.3 Pentium 虚存", keyPoints: [{ title: "机制", content: "段页式管理。" }] },
+  "6.7.4": { id: "6.7.4", type: "subsection", title: "6.7.4 存储管理部件", keyPoints: [{ title: "MMU", content: "内存管理单元，负责地址映射。" }] },
 
   // === CHAPTER 7 ===
   "ch7": {
@@ -502,40 +695,39 @@ export const CONTENT_REGISTRY: Record<string, ContentBlock> = {
     type: "chapter",
     title: "第7章 输入/输出系统",
     description: "CPU与外设的通信方式。",
-    childrenIds: ["7.1", "7.2"]
+    childrenIds: ["7.1", "7.2", "7.3", "7.4", "7.5", "7.6", "7.7"]
   },
-  "7.1": { id: "7.1", type: "section", title: "7.1 I/O接口", childrenIds: ["7.1.1"] },
-  "7.1.1": {
-    id: "7.1.1",
-    type: "subsection",
-    title: "7.1.1 接口功能",
-    keyPoints: [{ title: "功能", content: "数据缓冲、电平转换、地址译码、状态控制。" }]
-  },
-  "7.2": { id: "7.2", type: "section", title: "7.2 I/O控制方式", childrenIds: ["7.2.1", "7.2.2", "7.2.3"] },
-  "7.2.1": {
-    id: "7.2.1",
-    type: "subsection",
-    title: "7.2.1 程序查询方式",
-    keyPoints: [{ title: "特点", content: "CPU不断查询状态位，串行工作，效率极低 (踏步等待)。" }]
-  },
-  "7.2.2": {
-    id: "7.2.2",
-    type: "subsection",
-    title: "7.2.2 中断方式",
-    keyPoints: [
-      { title: "流程", content: "中断请求 -> 中断响应 -> 保护现场 -> 中断服务(ISR) -> 恢复现场 -> 中断返回。", isExamFocus: true },
-      { title: "多重中断", content: "利用中断屏蔽技术实现中断嵌套（高优先级打断低优先级）。" }
-    ]
-  },
-  "7.2.3": {
-    id: "7.2.3",
-    type: "subsection",
-    title: "7.2.3 DMA方式",
-    keyPoints: [
-      { title: "特点", content: "DMA控制器接管总线，实现内存与外设直接传输数据块，不经过CPU。" },
-      { title: "方式", content: "周期挪用 (Cycle Stealing)、停止CPU访存、突发传输。" }
-    ]
-  }
+  "7.1": { id: "7.1", type: "section", title: "7.1 输入/输出系统概述", childrenIds: ["7.1.1", "7.1.2", "7.1.3"] },
+  "7.1.1": { id: "7.1.1", type: "subsection", title: "7.1.1 连接方式", keyPoints: [{ title: "方式", content: "辐射式 (早期)、总线式 (现代)。" }] },
+  "7.1.2": { id: "7.1.2", type: "subsection", title: "7.1.2 I/O 接口的功能和分类", keyPoints: [{ title: "功能", content: "数据缓冲、电平转换、地址译码、状态控制。" }] },
+  "7.1.3": { id: "7.1.3", type: "subsection", title: "7.1.3 接口的编址", keyPoints: [{ title: "编址", content: "统一编址 (Mem Mapped IO), 独立编址 (IO Mapped IO)。" }] },
+  "7.2": { id: "7.2", type: "section", title: "7.2 直接程序控制方式", childrenIds: [] },
+  "7.3": { id: "7.3", type: "section", title: "7.3 程序中断方式", childrenIds: ["7.3.1", "7.3.2", "7.3.3", "7.3.4", "7.3.5"] },
+  "7.3.1": { id: "7.3.1", type: "subsection", title: "7.3.1 中断的基本概念", keyPoints: [{ title: "中断", content: "CPU暂停当前程序，转去执行中断服务程序。" }] },
+  "7.3.2": { id: "7.3.2", type: "subsection", title: "7.3.2 中断的过程", keyPoints: [{ title: "流程", content: "请求 -> 判优 -> 响应 -> 保护现场 -> 服务 -> 恢复 -> 返回。", isExamFocus: true }] },
+  "7.3.3": { id: "7.3.3", type: "subsection", title: "7.3.3 80x86 中断指令", keyPoints: [{ title: "INT n", content: "软中断指令。" }] },
+  "7.3.4": { id: "7.3.4", type: "subsection", title: "7.3.4 中断接口模型", keyPoints: [{ title: "模型", content: "中断请求触发器 (INTR), 屏蔽触发器 (MASK)。" }] },
+  "7.3.5": { id: "7.3.5", type: "subsection", title: "7.3.5 中断接口举例", keyPoints: [{ title: "8259A", content: "可编程中断控制器。" }] },
+  "7.4": { id: "7.4", type: "section", title: "7.4 DMA 方式", childrenIds: ["7.4.1", "7.4.2", "7.4.3", "7.4.4"] },
+  "7.4.1": { id: "7.4.1", type: "subsection", title: "7.4.1 DMA 一般概念", keyPoints: [{ title: "DMA", content: "直接存储器访问，主存与外设直接交换数据。" }] },
+  "7.4.2": { id: "7.4.2", type: "subsection", title: "7.4.2 DMA 工作过程", keyPoints: [{ title: "过程", content: "预处理 -> 数据传输 -> 后处理。传输时不需CPU干预。" }] },
+  "7.4.3": { id: "7.4.3", type: "subsection", title: "7.4.3 DMA 接口组成", keyPoints: [{ title: "组成", content: "主存地址寄存器、字计数器、数据缓冲寄存器、DMA控制逻辑。" }] },
+  "7.4.4": { id: "7.4.4", type: "subsection", title: "7.4.4 DMA 控制器", keyPoints: [{ title: "8237A", content: "典型的DMA控制器芯片。" }] },
+  "7.5": { id: "7.5", type: "section", title: "7.5 总线", childrenIds: ["7.5.1", "7.5.2", "7.5.3", "7.5.4"] },
+  "7.5.1": { id: "7.5.1", type: "subsection", title: "7.5.1 总线功能与分类", keyPoints: [{ title: "分类", content: "片内总线、系统总线、通信总线。" }] },
+  "7.5.2": { id: "7.5.2", type: "subsection", title: "7.5.2 标准及信号", keyPoints: [{ title: "信号", content: "数据线、地址线、控制线。" }] },
+  "7.5.3": { id: "7.5.3", type: "subsection", title: "7.5.3 操作时序", keyPoints: [{ title: "时序", content: "同步、异步、半同步、分离事务。" }] },
+  "7.5.4": { id: "7.5.4", type: "subsection", title: "7.5.4 典型总线", keyPoints: [{ title: "举例", content: "ISA, PCI, PCI-E, USB。" }] },
+  "7.6": { id: "7.6", type: "section", title: "7.6 典型外设接口", childrenIds: ["7.6.1", "7.6.2"] },
+  "7.6.1": { id: "7.6.1", type: "subsection", title: "7.6.1 ATA 接口", keyPoints: [{ title: "IDE", content: "硬盘接口标准。" }] },
+  "7.6.2": { id: "7.6.2", type: "subsection", title: "7.6.2 SCSI 接口", keyPoints: [{ title: "SCSI", content: "小型计算机系统接口，智能通用接口。" }] },
+  "7.7": { id: "7.7", type: "section", title: "7.7 I/O 设备与 I/O 程序设计", childrenIds: ["7.7.1", "7.7.2", "7.7.3", "7.7.4", "7.7.5"] },
+  "7.7.1": { id: "7.7.1", type: "subsection", title: "7.7.1 概述", keyPoints: [{ title: "设备", content: "人机交互设备、外部存储设备、通信设备。" }] },
+  "7.7.2": { id: "7.7.2", type: "subsection", title: "7.7.2 键盘", keyPoints: [{ title: "键盘", content: "扫描码。" }] },
+  "7.7.3": { id: "7.7.3", type: "subsection", title: "7.7.3 鼠标器", keyPoints: [{ title: "鼠标", content: "机械式、光电式。" }] },
+  "7.7.4": { id: "7.7.4", type: "subsection", title: "7.7.4 打印机", keyPoints: [{ title: "打印机", content: "针式、喷墨、激光。" }] },
+  "7.7.5": { id: "7.7.5", type: "subsection", title: "7.7.5 液晶显示器", keyPoints: [{ title: "LCD", content: "液晶控制透光率。" }] }
+
 };
 
 
@@ -569,15 +761,17 @@ export const SYLLABUS_DATA: Part[] = [
             id: "1.3",
             title: "1.3 层次结构模型",
             children: [
-              { id: "1.3.1", title: "1.3.1 多级层次结构" },
-              { id: "1.3.2", title: "1.3.2 软硬件逻辑等价性" }
+              { id: "1.3.1", title: "1.3.1 从计算机系统组成角度划分层次结构" },
+              { id: "1.3.2", title: "1.3.2 从语言功能角度划分层次结构" },
+              { id: "1.3.3", title: "1.3.3 软件和硬件在逻辑上的等价" }
             ]
           },
           {
             id: "1.4",
             title: "1.4 计算机的工作过程",
             children: [
-              { id: "1.4.1", title: "1.4.1 指令执行过程" }
+              { id: "1.4.1", title: "1.4.1 处理问题的步骤" },
+              { id: "1.4.2", title: "1.4.2 指令执行过程" }
             ]
           },
           {
@@ -592,7 +786,9 @@ export const SYLLABUS_DATA: Part[] = [
             id: "1.6",
             title: "1.6 计算机的发展与应用",
             children: [
-              { id: "1.6.1", title: "1.6.1 摩尔定律" }
+              { id: "1.6.1", title: "1.6.1 计算机的发展历程" },
+              { id: "1.6.2", title: "1.6.2 计算机性能提高的技术" },
+              { id: "1.6.3", title: "1.6.3 计算机应用举例" }
             ]
           }
         ]
@@ -613,15 +809,22 @@ export const SYLLABUS_DATA: Part[] = [
             id: "2.2",
             title: "2.2 字符的表示",
             children: [
-              { id: "2.2.1", title: "2.2.1 ASCII与Unicode" }
+              { id: "2.2.1", title: "2.2.1 ASCII" },
+              { id: "2.2.2", title: "2.2.2 Unicode 编码" },
+              { id: "2.2.3", title: "2.2.3 汉字编码简介" }
             ]
           },
           {
             id: "2.3",
             title: "2.3 指令信息的表示",
             children: [
-              { id: "2.3.1", title: "2.3.1 指令格式与操作码" },
-              { id: "2.3.2", title: "2.3.2 寻址方式概述" }
+              { id: "2.3.1", title: "2.3.1 指令格式" },
+              { id: "2.3.2", title: "2.3.2 常用寻址方式" },
+              { id: "2.3.3", title: "2.3.3 指令类型" },
+              { id: "2.3.4", title: "2.3.4 Pentium II 指令格式" },
+              { id: "2.3.5", title: "2.3.5 RISC 概述" },
+              { id: "2.3.6", title: "2.3.6 MIPS 指令系统" },
+              { id: "2.3.7", title: "2.3.7 ARM 指令系统" }
             ]
           }
         ]
@@ -635,17 +838,39 @@ export const SYLLABUS_DATA: Part[] = [
         id: "ch3",
         title: "第3章 微体系结构层",
         children: [
-            { id: "3.1", title: "3.1 CPU的数据通路", children: [
-                { id: "3.1.1", title: "3.1.1 单总线结构" },
-                { id: "3.1.2", title: "3.1.2 多总线结构" }
+            { id: "3.1", title: "3.1 CPU 的组成和功能", children: [
+                { id: "3.1.1", title: "3.1.1 CPU 的组成" },
+                { id: "3.1.2", title: "3.1.2 指令执行过程" },
+                { id: "3.1.3", title: "3.1.3 时序控制方式" },
+                { id: "3.1.4", title: "3.1.4 指令流水线" }
             ]},
-            { id: "3.2", title: "3.2 控制单元的设计", children: [
-                { id: "3.2.1", title: "3.2.1 硬布线控制器" },
-                { id: "3.2.2", title: "3.2.2 微程序控制器" }
+            { id: "3.2", title: "3.2 ALU 和运算方法", children: [
+                { id: "3.2.1", title: "3.2.1 ALU 介绍" },
+                { id: "3.2.2", title: "3.2.2 定点数运算方法" },
+                { id: "3.2.3", title: "3.2.3 浮点数运算方法" },
+                { id: "3.2.4", title: "3.2.4 十进制数加、减运算" }
             ]},
-            { id: "3.3", title: "3.3 指令流水线", children: [
-                { id: "3.3.1", title: "3.3.1 流水线原理" },
-                { id: "3.3.2", title: "3.3.2 流水线冒险" }
+            { id: "3.3", title: "3.3 CPU 模型机的组成及其数据通路", children: [
+                { id: "3.3.1", title: "3.3.1 基本组成" },
+                { id: "3.3.2", title: "3.3.2 数据传输" }
+            ]},
+            { id: "3.4", title: "3.4 组合逻辑控制器原理", children: [
+                { id: "3.4.1", title: "3.4.1 模型机的指令系统" },
+                { id: "3.4.2", title: "3.4.2 模型机的时序系统" },
+                { id: "3.4.3", title: "3.4.3 指令流程" },
+                { id: "3.4.4", title: "3.4.4 微命令的综合与产生" },
+                { id: "3.4.5", title: "3.4.5 小结" }
+            ]},
+            { id: "3.5", title: "3.5 微程序控制器原理", children: [
+                { id: "3.5.1", title: "3.5.1 微程序控制概念" },
+                { id: "3.5.2", title: "3.5.2 微指令编码方式" },
+                { id: "3.5.3", title: "3.5.3 微程序的顺序控制" },
+                { id: "3.5.4", title: "3.5.4 微指令格式" },
+                { id: "3.5.5", title: "3.5.5 典型微指令举例——模型机微指令格式" }
+            ]},
+            { id: "3.6", title: "3.6 典型 RISC 处理器微体系结构", children: [
+                { id: "3.6.1", title: "3.6.1 MIPS R4000 的微体系结构" },
+                { id: "3.6.2", title: "3.6.2 ARM7 的微体系结构" }
             ]}
         ] 
       },
@@ -653,11 +878,23 @@ export const SYLLABUS_DATA: Part[] = [
         id: "ch4",
         title: "第4章 指令系统层",
         children: [
-            { id: "4.1", title: "4.1 指令系统体系结构", children: [
-                { id: "4.1.1", title: "4.1.1 CISC vs RISC" }
+            { id: "4.1", title: "4.1 80x86 CPU", children: [
+                { id: "4.1.1", title: "4.1.1 8086/8088 CPU" },
+                { id: "4.1.2", title: "4.1.2 80386/80486 CPU" },
+                { id: "4.1.3", title: "4.1.3 Pentium 系列 CPU" }
             ]},
-            { id: "4.2", title: "4.2 寻址方式详解", children: [
-                { id: "4.2.1", title: "4.2.1 基本寻址方式" }
+            { id: "4.2", title: "4.2 80x86 CPU 的寄存器和主存储器", children: [
+                { id: "4.2.1", title: "4.2.1 80x86 CPU 的寄存器" },
+                { id: "4.2.2", title: "4.2.2 80x86 的主存储器" }
+            ]},
+            { id: "4.3", title: "4.3 80x86 CPU 指令系统", children: [
+                { id: "4.3.1", title: "4.3.1 80x86 寻址方式" },
+                { id: "4.3.2", title: "4.3.2 80x86 CPU 指令分类" },
+                { id: "4.3.3", title: "4.3.3 传送类指令" },
+                { id: "4.3.4", title: "4.3.4 算术运算类指令" },
+                { id: "4.3.5", title: "4.3.5 逻辑类指令" },
+                { id: "4.3.6", title: "4.3.6 串操作类指令" },
+                { id: "4.3.7", title: "4.3.7 处理机控制类指令" }
             ]}
         ]
       },
@@ -665,12 +902,38 @@ export const SYLLABUS_DATA: Part[] = [
         id: "ch5",
         title: "第5章 汇编语言层",
         children: [
-             { id: "5.1", title: "5.1 汇编基础", children: [
-                { id: "5.1.1", title: "5.1.1 语句格式" }
+             { id: "5.1", title: "5.1 汇编语言层概述", children: [
+                 { id: "5.1.1", title: "5.1.1 汇编程序" }
              ]},
-             { id: "5.2", title: "5.2 程序流程控制", children: [
-                { id: "5.2.1", title: "5.2.1 顺序与分支" },
-                { id: "5.2.2", title: "5.2.2 循环与子程序" }
+             { id: "5.2", title: "5.2 汇编语言语句格式", children: [
+                 { id: "5.2.1", title: "5.2.1 语句格式" }
+             ]},
+             { id: "5.3", title: "5.3 80x86 宏汇编语言数据、表达式和运算符", children: [
+                 { id: "5.3.1", title: "5.3.1 常数" },
+                 { id: "5.3.2", title: "5.3.2 变量" },
+                 { id: "5.3.3", title: "5.3.3 标号" },
+                 { id: "5.3.4", title: "5.3.4 表达式与运算符" }
+             ]},
+             { id: "5.4", title: "5.4 80x86 宏汇编语言伪指令", children: [
+                 { id: "5.4.1", title: "5.4.1 符号定义语句" },
+                 { id: "5.4.2", title: "5.4.2 处理器选择伪指令" },
+                 { id: "5.4.3", title: "5.4.3 段结构伪指令" },
+                 { id: "5.4.4", title: "5.4.4 段组伪指令" },
+                 { id: "5.4.5", title: "5.4.5 内存模式和简化段定义伪指令" },
+                 { id: "5.4.6", title: "5.4.6 定位和对准伪指令" },
+                 { id: "5.4.7", title: "5.4.7 过程定义伪指令" },
+                 { id: "5.4.8", title: "5.4.8 包含伪指令" },
+                 { id: "5.4.9", title: "5.4.9 标题伪指令" }
+             ]},
+             { id: "5.5", title: "5.5 宏指令", children: []},
+             { id: "5.6", title: "5.6 汇编语言程序设计基本技术", children: [
+                 { id: "5.6.1", title: "5.6.1 程序设计步骤" },
+                 { id: "5.6.2", title: "5.6.2 顺序程序设计" },
+                 { id: "5.6.3", title: "5.6.3 分支程序设计" },
+                 { id: "5.6.4", title: "5.6.4 循环程序设计" },
+                 { id: "5.6.5", title: "5.6.5 子程序设计" },
+                 { id: "5.6.6", title: "5.6.6 系统功能子程序的调用" },
+                 { id: "5.6.7", title: "5.6.7 汇编语言程序的开发" }
              ]}
         ]
       }
@@ -680,18 +943,78 @@ export const SYLLABUS_DATA: Part[] = [
     title: "第三篇 存储系统和输入/输出系统",
     chapters: [
       { id: "ch6", title: "第6章 存储系统", children: [
-          { id: "6.1", title: "6.1 存储器概述", children: [{id: "6.1.1", title: "6.1.1 分类与层级"}] },
-          { id: "6.2", title: "6.2 主存储器", children: [{id: "6.2.1", title: "6.2.1 存储扩展"}] },
-          { id: "6.3", title: "6.3 Cache", children: [{id: "6.3.1", title: "6.3.1 映射方式"}, {id: "6.3.2", title: "6.3.2 替换算法"}] },
-          { id: "6.4", title: "6.4 虚拟存储器", children: [{id: "6.4.1", title: "6.4.1 页式虚拟存储器"}] }
+          { id: "6.1", title: "6.1 存储系统概述", children: [
+              {id: "6.1.1", title: "6.1.1 存储器的分类"},
+              {id: "6.1.2", title: "6.1.2 主存的主要技术指标"}
+          ] },
+          { id: "6.2", title: "6.2 存储原理", children: [
+              {id: "6.2.1", title: "6.2.1 半导体存储器的存储原理"},
+              {id: "6.2.2", title: "6.2.2 磁表面存储器的存储原理"}
+          ] },
+          { id: "6.3", title: "6.3 主存储器的组织", children: [
+              {id: "6.3.1", title: "6.3.1 主存储器的逻辑设计"},
+              {id: "6.3.2", title: "6.3.2 主存储器与 CPU 的连接"},
+              {id: "6.3.3", title: "6.3.3 Pentium CPU 与存储器组织"},
+              {id: "6.3.4", title: "6.3.4 高级 DRAM"}
+          ] },
+          { id: "6.4", title: "6.4 高速缓冲存储器", children: [
+              {id: "6.4.1", title: "6.4.1 Cache 的工作原理"},
+              {id: "6.4.2", title: "6.4.2 Cache 的组织"},
+              {id: "6.4.3", title: "6.4.3 Pentium II CPU 的 Cache 组织"}
+          ] },
+          { id: "6.5", title: "6.5 外部存储器", children: [
+              {id: "6.5.1", title: "6.5.1 硬磁盘存储器"},
+              {id: "6.5.2", title: "6.5.2 U盘和固态硬盘"}
+          ] },
+          { id: "6.6", title: "6.6 物理存储系统的组织", children: [
+              {id: "6.6.1", title: "6.6.1 存储系统的层次结构"},
+              {id: "6.6.2", title: "6.6.2 磁盘阵列"},
+              {id: "6.6.3", title: "6.6.3 多体交叉存取技术"}
+          ] },
+          { id: "6.7", title: "6.7 虚拟存储系统的组织", children: [
+              {id: "6.7.1", title: "6.7.1 概述"},
+              {id: "6.7.2", title: "6.7.2 虚拟存储器的组织方式"},
+              {id: "6.7.3", title: "6.7.3 Pentium CPU 支持的虚拟存储器"},
+              {id: "6.7.4", title: "6.7.4 存储管理部件"}
+          ] }
       ] },
       { id: "ch7", title: "第7章 输入/输出系统", children: [
-          { id: "7.1", title: "7.1 I/O接口", children: [{id: "7.1.1", title: "7.1.1 接口功能"}] },
-          { id: "7.2", title: "7.2 I/O控制方式", children: [
-              {id: "7.2.1", title: "7.2.1 程序查询方式"},
-              {id: "7.2.2", title: "7.2.2 中断方式"},
-              {id: "7.2.3", title: "7.2.3 DMA方式"}
-          ]}
+          { id: "7.1", title: "7.1 输入/输出系统概述", children: [
+              {id: "7.1.1", title: "7.1.1 主机与外围设备间的连接方式"},
+              {id: "7.1.2", title: "7.1.2 I/O 接口的功能和分类"},
+              {id: "7.1.3", title: "7.1.3 接口的编址和 I/O 指令"}
+          ] },
+          { id: "7.2", title: "7.2 直接程序控制方式", children: [] },
+          { id: "7.3", title: "7.3 程序中断方式", children: [
+              {id: "7.3.1", title: "7.3.1 中断的基本概念"},
+              {id: "7.3.2", title: "7.3.2 中断的过程"},
+              {id: "7.3.3", title: "7.3.3 80x86 中断指令"},
+              {id: "7.3.4", title: "7.3.4 中断接口模型"},
+              {id: "7.3.5", title: "7.3.5 中断接口举例"}
+          ] },
+          { id: "7.4", title: "7.4 DMA 方式", children: [
+              {id: "7.4.1", title: "7.4.1 DMA 方式的一般概念"},
+              {id: "7.4.2", title: "7.4.2 DMA 工作过程"},
+              {id: "7.4.3", title: "7.4.3 DMA 接口组成"},
+              {id: "7.4.4", title: "7.4.4 DMA 控制器编程及应用"}
+          ] },
+          { id: "7.5", title: "7.5 总线", children: [
+              {id: "7.5.1", title: "7.5.1 总线的功能与分类"},
+              {id: "7.5.2", title: "7.5.2 总线标准及信号组成"},
+              {id: "7.5.3", title: "7.5.3 总线操作时序"},
+              {id: "7.5.4", title: "7.5.4 典型总线举例"}
+          ] },
+          { id: "7.6", title: "7.6 典型外设接口", children: [
+              {id: "7.6.1", title: "7.6.1 ATA 接口"},
+              {id: "7.6.2", title: "7.6.2 SCSI 接口"}
+          ] },
+          { id: "7.7", title: "7.7 I/O 设备与 I/O 程序设计", children: [
+              {id: "7.7.1", title: "7.7.1 概述"},
+              {id: "7.7.2", title: "7.7.2 键盘"},
+              {id: "7.7.3", title: "7.7.3 鼠标器"},
+              {id: "7.7.4", title: "7.7.4 打印机"},
+              {id: "7.7.5", title: "7.7.5 液晶显示器"}
+          ] }
       ] }
     ]
   }
