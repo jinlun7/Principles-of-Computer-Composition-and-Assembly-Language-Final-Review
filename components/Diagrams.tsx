@@ -159,12 +159,78 @@ export const CacheMapping = () => (
     </div>
 );
 
+// === 6. Segmented Addressing (Logic to Physical) ===
+export const SegmentedAddr = () => (
+    <div className="p-4 bg-slate-50 border border-slate-200 rounded-lg flex flex-col items-center gap-4">
+        <h4 className="text-sm font-bold text-slate-500 uppercase tracking-wider">逻辑地址转换物理地址</h4>
+        <svg viewBox="0 0 500 200" className="w-full max-w-lg">
+            {/* Logic Address */}
+            <g transform="translate(50, 40)">
+                <rect x="0" y="0" width="80" height="40" fill="#dbeafe" stroke="#2563eb" />
+                <text x="40" y="25" textAnchor="middle" className="text-xs font-bold fill-blue-900">段基址</text>
+                <text x="40" y="-10" textAnchor="middle" className="text-[10px] fill-slate-500">16位</text>
+
+                <rect x="100" y="0" width="80" height="40" fill="#ffedd5" stroke="#ea580c" />
+                <text x="140" y="25" textAnchor="middle" className="text-xs font-bold fill-orange-900">偏移量</text>
+                <text x="140" y="-10" textAnchor="middle" className="text-[10px] fill-slate-500">16位</text>
+            </g>
+
+            {/* Calculation */}
+            <path d="M90 60 L120 100" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#arrow)" />
+            <path d="M140 60 L160 100" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#arrow)" />
+
+            <g transform="translate(100, 110)">
+                <text x="100" y="0" textAnchor="middle" className="text-xs fill-slate-700">物理地址 = 段基址 × 16 + 偏移量</text>
+                <text x="100" y="20" textAnchor="middle" className="text-[10px] fill-slate-500">(左移4位)</text>
+            </g>
+
+             <g transform="translate(120, 140)">
+                <rect x="0" y="0" width="160" height="40" fill="#dcfce7" stroke="#16a34a" />
+                <text x="80" y="25" textAnchor="middle" className="text-xs font-bold fill-green-900">物理地址 (20位)</text>
+            </g>
+        </svg>
+    </div>
+);
+
+// === 7. Interrupt Timeline ===
+export const InterruptTimeline = () => (
+    <div className="p-4 bg-slate-50 border border-slate-200 rounded-lg flex flex-col items-center gap-4">
+        <h4 className="text-sm font-bold text-slate-500 uppercase tracking-wider">中断处理过程时间轴</h4>
+        <svg viewBox="0 0 500 200" className="w-full max-w-lg">
+             <line x1="50" y1="100" x2="450" y2="100" stroke="#cbd5e1" strokeWidth="2" />
+
+             {/* Main Program */}
+             <rect x="50" y="90" width="100" height="20" fill="#3b82f6" rx="2" />
+             <text x="100" y="80" textAnchor="middle" className="text-xs fill-blue-600 font-bold">主程序</text>
+
+             {/* Interrupt Point */}
+             <circle cx="150" cy="100" r="4" fill="#ef4444" />
+             <text x="150" y="130" textAnchor="middle" className="text-[10px] fill-red-500">中断请求</text>
+
+             {/* Response */}
+             <path d="M150 100 L180 50 L350 50 L380 100" fill="none" stroke="#64748b" strokeWidth="2" strokeDasharray="4" />
+
+             {/* ISR */}
+             <rect x="200" y="40" width="120" height="20" fill="#f59e0b" rx="2" />
+             <text x="260" y="30" textAnchor="middle" className="text-xs fill-orange-600 font-bold">中断服务程序 (ISR)</text>
+
+             {/* Return */}
+             <rect x="380" y="90" width="70" height="20" fill="#3b82f6" rx="2" />
+             <text x="415" y="80" textAnchor="middle" className="text-xs fill-blue-600 font-bold">继续执行</text>
+
+             <text x="260" y="150" textAnchor="middle" className="text-[10px] fill-slate-400">保护现场 -> 服务 -> 恢复现场 -> 返回</text>
+        </svg>
+    </div>
+);
+
 const DIAGRAM_MAP: Record<string, React.FC> = {
     VonNeumannArch,
     ComplementRing,
     PipelineDiagram,
     MemoryHierarchy,
     CacheMapping,
+    SegmentedAddr,
+    InterruptTimeline,
 };
 
 export default DIAGRAM_MAP;

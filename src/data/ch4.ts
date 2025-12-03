@@ -72,6 +72,7 @@ export const CH4_DATA: Record<string, ContentBlock> = {
     id: "4.2.2",
     type: "subsection",
     title: "4.2.2 80x86 的主存储器",
+    diagram: "SegmentedAddr",
     keyPoints: [
       {
         title: "物理地址计算",
@@ -85,6 +86,16 @@ $$物理地址 = 段基址 \\times 16 + 偏移地址$$
       {
         title: "小端存储 (Little Endian)",
         content: "低字节存放在低地址，高字节存放在高地址。x86 系列采用小端模式。"
+      }
+    ],
+    examples: [
+      {
+        question: "若 CS=2500H, IP=3000H, 则指令的物理地址是多少？",
+        solution: `**计算公式**：
+$PA = CS \\times 16 + IP$
+$PA = 25000H + 3000H = 28000H$
+**答案**：28000H`,
+        tip: "乘以16就是左移一位十六进制。"
       }
     ]
   },

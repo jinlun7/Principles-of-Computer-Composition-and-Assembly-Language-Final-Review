@@ -57,6 +57,7 @@ export const CH7_DATA: Record<string, ContentBlock> = {
     id: "7.3.2",
     type: "subsection",
     title: "7.3.2 中断过程",
+    diagram: "InterruptTimeline",
     keyPoints: [
       {
         title: "中断处理流程 (考点)",
@@ -128,6 +129,16 @@ DMA 控制器接管总线权，实现**存储器与外设之间**直接的大批
 例：频率 33MHz，位宽 32位。
 $BW = 33 \\times 4 = 132 MB/s$。`
       }
+    ],
+    examples: [
+        {
+            question: "某总线频率 33MHz，数据总线位宽 32位，求总线带宽。",
+            solution: `**计算**：
+位宽 = 32 bit = 4 Byte
+带宽 = 频率 × 字节宽 = 33 MHz × 4 B = 132 MB/s。
+**答案**：132 MB/s`,
+            tip: "注意单位转换，1B=8bit。"
+        }
     ]
   }
 };
