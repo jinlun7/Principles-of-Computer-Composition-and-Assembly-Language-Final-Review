@@ -1,6 +1,7 @@
 
 import React, { useState, useMemo } from 'react';
-import { SYLLABUS_DATA, CONTENT_REGISTRY } from './constants';
+import { SYLLABUS_DATA } from './constants';
+import { CONTENT_REGISTRY } from './src/data/index';
 import Sidebar from './components/Sidebar';
 import PlanDashboard from './components/PlanDashboard';
 import ContentRenderer from './components/ContentRenderer';

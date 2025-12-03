@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { BookOpen, Lightbulb, AlertCircle, CheckCircle2, Calculator, HelpCircle, PenTool, List, ArrowRight, Eye, EyeOff } from 'lucide-react';
 import { ContentBlock, KeyPoint, Example } from '../types';
-import { CONTENT_REGISTRY } from '../constants';
+import { CONTENT_REGISTRY } from '../src/data/index';
+import DIAGRAM_MAP from './Diagrams';
 
 interface ContentRendererProps {
     data: ContentBlock;
@@ -116,6 +117,12 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({ data, onNavigate }) =
                     <p className="text-lg text-slate-600 leading-relaxed border-l-4 border-blue-200 pl-4">
                         {data.description}
                     </p>
+                )}
+                {/* Diagram Support */}
+                {data.diagram && DIAGRAM_MAP[data.diagram] && (
+                    <div className="mt-6 flex justify-center">
+                        {React.createElement(DIAGRAM_MAP[data.diagram])}
+                    </div>
                 )}
             </div>
 
